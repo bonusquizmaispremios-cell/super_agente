@@ -25,36 +25,80 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* Força tema claro em todo o app — sobrescreve dark mode do Streamlit */
-html, body, .stApp, [data-testid="stAppViewContainer"],
-[data-testid="stMain"], [data-testid="block-container"],
-.main, .block-container, section[data-testid="stSidebar"] ~ div {
+/* ═══ TEMA CLARO FORÇADO — sobrescreve dark mode do Streamlit ═══ */
+html, body { background-color:#F8F9FA !important; color:#1A1A2E !important; }
+
+/* Todos os containers do Streamlit */
+.stApp, .stApp > *, .main, .block-container,
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewContainer"] > *,
+[data-testid="stMain"],
+[data-testid="stMain"] > *,
+[data-testid="block-container"],
+[data-testid="block-container"] > *,
+[data-testid="stVerticalBlock"],
+[data-testid="stHorizontalBlock"] {
     background-color:#F8F9FA !important;
     color:#1A1A2E !important;
 }
-.stApp { font-family:'Inter',sans-serif; }
-/* Textos gerais */
-.stApp p, .stApp span, .stApp label, .stApp div,
-.stApp li, .stApp td, .stApp th, .stApp pre,
-[data-testid="stMarkdownContainer"] p,
-[data-testid="stMarkdownContainer"] li,
-[data-testid="stMarkdownContainer"] span {
+
+/* TEXTO — forçar escuro em absolutamente todo elemento de texto */
+*, *::before, *::after {
     color:#1A1A2E !important;
+    font-family:'Inter',sans-serif !important;
 }
-/* Expanders e containers */
-[data-testid="stExpander"], .streamlit-expanderHeader,
-[data-testid="stVerticalBlock"], [data-testid="stHorizontalBlock"] {
-    background-color:#F8F9FA !important;
+
+/* Exceções: botões e badges mantêm texto branco */
+.stButton > button,
+.stButton > button *,
+.stButton > button p,
+.stButton > button span,
+.badge, .badge *,
+.badge-verde, .badge-verde *,
+.badge-amarelo, .badge-amarelo *,
+.badge-azul, .badge-azul *,
+.badge-roxo, .badge-roxo * {
+    color:white !important;
+}
+
+/* Inputs */
+.stTextInput > div > div > input,
+.stTextArea > div > textarea,
+.stSelectbox > div > div > div,
+.stNumberInput > div > div > input {
+    background-color:#FFFFFF !important;
     color:#1A1A2E !important;
+    border:1px solid #CED4DA !important;
 }
+
 /* Abas */
-[data-testid="stTabs"] { background-color:#F8F9FA !important; }
-.stTabs [data-baseweb="tab-panel"] { background-color:#F8F9FA !important; }
-.stTabs [data-baseweb="tab"] { color:#495057 !important; }
-.stTabs [aria-selected="true"] { color:#1A1A2E !important; border-bottom-color:#495057 !important; }
+[data-testid="stTabs"],
+.stTabs [data-baseweb="tab-panel"],
+.stTabs [data-baseweb="tab-list"] {
+    background-color:#F8F9FA !important;
+}
+.stTabs [data-baseweb="tab"],
+.stTabs [data-baseweb="tab"] * { color:#495057 !important; }
+.stTabs [aria-selected="true"],
+.stTabs [aria-selected="true"] * {
+    color:#1A1A2E !important;
+    border-bottom-color:#343A40 !important;
+}
+
+/* Expanders */
+[data-testid="stExpander"],
+.streamlit-expanderHeader,
+.streamlit-expanderHeader * {
+    background-color:#FFFFFF !important;
+    color:#1A1A2E !important;
+}
+
 /* Métricas */
 [data-testid="stMetric"] { background:#FFFFFF !important; border-radius:10px; padding:12px; border:1px solid #DEE2E6; }
-[data-testid="stMetricValue"], [data-testid="stMetricLabel"] { color:#1A1A2E !important; }
+[data-testid="stMetricValue"], [data-testid="stMetricLabel"],
+[data-testid="stMetricDelta"] { color:#1A1A2E !important; }
+
+/* Sidebar oculta */
 [data-testid="stSidebar"] { display:none; }
 
 .stTextInput>div>div>input, .stTextArea>div>textarea,
