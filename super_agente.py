@@ -101,6 +101,50 @@ html, body { background-color:#F8F9FA !important; color:#1A1A2E !important; }
 /* Sidebar oculta */
 [data-testid="stSidebar"] { display:none; }
 
+/* ═══ INPUTS — fundo branco e texto escuro (BaseWeb) ═══ */
+input, textarea, select,
+[data-baseweb="input"] input,
+[data-baseweb="textarea"] textarea,
+[data-baseweb="select"] input,
+[data-baseweb="input"],
+[data-baseweb="input"] > div,
+[data-baseweb="textarea"],
+[data-baseweb="textarea"] > div,
+[data-baseweb="base-input"],
+[data-baseweb="base-input"] > div {
+    background-color:#FFFFFF !important;
+    background:#FFFFFF !important;
+    color:#1A1A2E !important;
+}
+
+/* ═══ STAT-BOXES / cards escuros do Nexus English ═══ */
+/* Qualquer div com background escuro dentro do stApp */
+.stApp div[style*="background:#0F"],
+.stApp div[style*="background: #0F"],
+.stApp div[style*="background:#1A"],
+.stApp div[style*="background: #1A"],
+.stApp div[style*="background:#16"],
+.stApp div[style*="background: #16"],
+.stApp div[style*="background-color:#0F"],
+.stApp div[style*="background-color: #0F"],
+.stApp div[style*="background-color:#1A"],
+.stApp div[style*="background-color: #1A"],
+.stApp div[style*="background-color:#16"],
+.stApp div[style*="background-color: #16"] {
+    background-color:#F0F4FF !important;
+    background:#F0F4FF !important;
+    color:#1A1A2E !important;
+}
+
+/* ═══ Selectbox dropdown ═══ */
+[data-baseweb="popover"] *,
+[data-baseweb="menu"] *,
+[role="listbox"] *,
+[role="option"] {
+    background-color:#FFFFFF !important;
+    color:#1A1A2E !important;
+}
+
 .stTextInput>div>div>input, .stTextArea>div>textarea,
 .stSelectbox>div>div>div, .stNumberInput>div>div>input {
     background-color:#FFFFFF !important; color:#1A1A2E !important;
@@ -292,6 +336,33 @@ def _executar_agente(agente: dict):
         "timedelta":  timedelta,
     }
     exec(compile(codigo, f"<{codigo_key}>", "exec"), _ns)
+
+    # CSS de reforço — aplicado DEPOIS do agente para sobrescrever estilos inline
+    st.markdown("""<style>
+input, textarea,
+[data-baseweb="input"] input,
+[data-baseweb="textarea"] textarea,
+[data-baseweb="base-input"] input,
+[data-baseweb="base-input"] > div {
+    background:#FFFFFF !important;
+    background-color:#FFFFFF !important;
+    color:#1A1A2E !important;
+}
+[data-baseweb="input"] > div,
+[data-baseweb="input"],
+[data-baseweb="textarea"],
+[data-baseweb="base-input"] {
+    background:#FFFFFF !important;
+    background-color:#FFFFFF !important;
+}
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"],
+[data-testid="block-container"],
+.stApp { background-color:#F8F9FA !important; }
+p, span, label, div, li, td, th, h1, h2, h3, h4, h5, h6,
+[data-testid="stMarkdownContainer"] * { color:#1A1A2E !important; }
+.stButton > button, .stButton > button * { color:white !important; }
+</style>""", unsafe_allow_html=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════
