@@ -371,6 +371,40 @@ def _executar_agente(agente: dict):
     }
     exec(compile(codigo, f"<{codigo_key}>", "exec"), _ns)
 
+    # ── BACKUP DISCRETO — aparece no rodapé de todos os agentes ──────────────
+    st.markdown("<hr style='border:none;border-top:1px solid #DEE2E6;margin:32px 0 8px 0'>",
+                unsafe_allow_html=True)
+    with st.expander("⚙️ Backup de dados"):
+        _col_dl, _col_ul = st.columns(2)
+        with _col_dl:
+            _dados_bkp = {k: v for k, v in st.session_state.items()
+                          if not k.startswith("sa_") and k not in ("etapa","autenticado")}
+            st.download_button(
+                label="💾 Baixar meus dados (.json)",
+                data=json.dumps(_dados_bkp, ensure_ascii=False, indent=2, default=str),
+                file_name=f"super_agente_{st.session_state.get('sa_usuario','dados')}.json",
+                mime="application/json",
+                key=f"sa_dl_{codigo_key}",
+                use_container_width=True,
+            )
+        with _col_ul:
+            _arq_up = st.file_uploader(
+                "📂 Carregar dados salvos",
+                type=["json"],
+                key=f"sa_ul_{codigo_key}",
+                label_visibility="collapsed",
+            )
+            if _arq_up is not None:
+                try:
+                    _dados_up = json.load(_arq_up)
+                    _bloqueadas = {"sa_etapa","sa_agente","sa_usuario","sa_api_key","etapa","autenticado"}
+                    for _k, _v in _dados_up.items():
+                        if _k not in _bloqueadas:
+                            st.session_state[_k] = _v
+                    st.success("✅ Dados restaurados! Recarregue o agente.")
+                except Exception as _e:
+                    st.error(f"Erro ao carregar: {_e}")
+
     # CSS de reforço — aplicado DEPOIS do agente para sobrescrever estilos inline
     st.markdown("""<style>
 input, textarea,
@@ -433,9 +467,6 @@ if st.session_state.sa_etapa == "Login":
         nome  = st.text_input("👤 Seu Nome:", key="sa_inp_nome",  placeholder="Como quer ser chamado?")
         chave = st.text_input("🔑 Chave API da Groq:", type="password", key="sa_inp_chave", placeholder="gsk_...")
 
-        arq_j = st.file_uploader("📂 Carregar dados salvos (.json):", type=["json"], key="sa_inp_json")
-        dados_json = json.load(arq_j) if arq_j else {}
-
         st.markdown("<br>", unsafe_allow_html=True)
 
         if st.button("✨ ENTRAR NO SUPER AGENTE", key="sa_btn_login"):
@@ -446,10 +477,6 @@ if st.session_state.sa_etapa == "Login":
             else:
                 st.session_state.sa_usuario = nome.strip()
                 st.session_state.sa_api_key = chave.strip()
-                _bloqueadas = {"sa_etapa","sa_agente","sa_usuario","sa_api_key","etapa","autenticado"}
-                for _k, _v in dados_json.items():
-                    if _k not in _bloqueadas:
-                        st.session_state[_k] = _v
                 st.session_state.sa_etapa = "Hub"
                 st.rerun()
 
@@ -479,7 +506,17 @@ elif st.session_state.sa_etapa == "Hub":
         </div>
         """, unsafe_allow_html=True)
     with col_s:
-        st.markdown("<br><br><br>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        _dados_salvar = {k: v for k, v in st.session_state.items()
+                         if not k.startswith("sa_") and k not in ("etapa","autenticado")}
+        st.download_button(
+            label="💾 Salvar",
+            data=json.dumps(_dados_salvar, ensure_ascii=False, indent=2, default=str),
+            file_name=f"super_agente_{st.session_state.sa_usuario}.json",
+            mime="application/json",
+            key="sa_btn_download",
+            use_container_width=True,
+        )
         if st.button("🚪 Sair", key="sa_btn_sair"):
             for _k in list(st.session_state.keys()):
                 del st.session_state[_k]
