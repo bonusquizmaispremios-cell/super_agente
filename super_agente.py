@@ -9418,7 +9418,6 @@ if not st.session_state.autenticado:
         Selecione abaixo o arquivo <strong>.json</strong> que você salvou antes — tudo volta como era.
         </div>\"\"\", unsafe_allow_html=True)
 
-        dados_login = None
         if st.form_submit_button("🚀 ENTRAR NO SISTEMA", key="oraculoffsb501"):
             if nome and chave:
                 st.session_state.nome_user   = nome
@@ -10779,9 +10778,6 @@ elif st.session_state.etapa == "App":
     st.markdown(f"<div style='text-align:center;font-weight:700;font-size:1.1em;color:#1A1A2E;padding:4px 0;'>{_nav_ics[_nav_idx]} {_nav_lbs[_nav_idx]}</div>", unsafe_allow_html=True)
     st.markdown("<hr class='divider'>", unsafe_allow_html=True)
 
-    # ── BARRA SALVAR ── igual aos outros apps
-    if not em_partida:
-        barra_salvar()
 
 
     if st.session_state.pagina == "Dialogo":
