@@ -210,8 +210,9 @@ input, textarea, select,
 .chat-scroll-container { max-height:40vh; overflow-y:auto; display:flex; flex-direction:column; scroll-behavior:smooth; padding-bottom:4px; }
 
 .hub-header {
-    background: linear-gradient(135deg, #3B4B6B 0%, #2C3E6B 50%, #1A3460 100%);
+    background: linear-gradient(135deg, #C7D2FE 0%, #A5B4FC 100%);
     border-radius: 20px; padding: 36px 32px; margin-bottom: 32px; text-align: center;
+    border: 1px solid #818CF8;
 }
 .hub-card {
     background: linear-gradient(135deg, #FFFFFF, #F8F9FA);
@@ -433,9 +434,9 @@ elif st.session_state.sa_etapa == "Hub":
         st.markdown(f"""
         <div class="hub-header">
             <div style="font-size:3em; margin-bottom:8px;">🤖</div>
-            <h1 style="color:white !important; margin:0; font-size:1.8em;">Super Agente IA</h1>
-            <p style="color:#A3E635 !important; margin:6px 0 0 0; font-size:1em;">
-                Olá, <b style="color:white !important;">{st.session_state.sa_usuario}</b> · Escolha seu agente
+            <h1 style="color:#1E1B4B !important; margin:0; font-size:1.8em;">Super Agente IA</h1>
+            <p style="color:#4338CA !important; margin:6px 0 0 0; font-size:1em;">
+                Olá, <b style="color:#1E1B4B !important;">{st.session_state.sa_usuario}</b> · Escolha seu agente
             </p>
         </div>
         """, unsafe_allow_html=True)
