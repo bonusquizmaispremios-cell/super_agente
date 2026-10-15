@@ -60,6 +60,36 @@ html, body { background-color:#F8F9FA !important; color:#1A1A2E !important; }
 .badge-roxo, .badge-roxo * {
     color:white !important;
 }
+
+/* ═══ DOWNLOAD / UPLOAD — corrige ícone SVG encavalado ═══ */
+[data-testid="stDownloadButton"] > button,
+[data-testid="stDownloadButton"] > button *,
+[data-testid="stDownloadButton"] > button span,
+[data-testid="stDownloadButton"] > button p {
+    color:white !important;
+}
+[data-testid="stDownloadButton"] > button svg,
+[data-testid="stDownloadButton"] > button svg * {
+    color:inherit !important;
+    fill:white !important;
+}
+/* File uploader — label e ícone */
+[data-testid="stFileUploader"] [data-testid="stFileUploaderDropzone"] *,
+[data-testid="stFileUploader"] label,
+[data-testid="stFileUploader"] small,
+[data-testid="stFileUploader"] span {
+    color:#495057 !important;
+}
+[data-testid="stFileUploader"] svg,
+[data-testid="stFileUploader"] svg * {
+    color:#495057 !important;
+    fill:#495057 !important;
+}
+/* Garante que SVGs em geral não herdam color como fill */
+svg text, svg tspan { fill:inherit !important; color:inherit !important; }
+svg path, svg rect, svg circle, svg line, svg polyline, svg polygon {
+    /* não forçar fill aqui para não quebrar ícones coloridos */
+}
 .hub-header h1, .hub-header h2, .hub-header h3,
 .hub-header div { color:white !important; }
 .hub-header p   { color:#A3E635 !important; }
@@ -366,6 +396,12 @@ input, textarea,
 p, span, label, div, li, td, th, h1, h2, h3, h4, h5, h6,
 [data-testid="stMarkdownContainer"] * { color:#1A1A2E !important; }
 .stButton > button, .stButton > button * { color:white !important; }
+[data-testid="stDownloadButton"] > button,
+[data-testid="stDownloadButton"] > button * { color:white !important; }
+[data-testid="stDownloadButton"] > button svg,
+[data-testid="stDownloadButton"] > button svg * { fill:white !important; }
+[data-testid="stFileUploader"] svg,
+[data-testid="stFileUploader"] svg * { fill:#495057 !important; color:#495057 !important; }
 </style>""", unsafe_allow_html=True)
 
 
