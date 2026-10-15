@@ -48,7 +48,7 @@ html, body { background-color:#F8F9FA !important; color:#1A1A2E !important; }
     font-family:'Inter',sans-serif !important;
 }
 
-/* Exceções: botões e badges mantêm texto branco */
+/* Exceções: botões, badges e banner do hub mantêm texto branco/claro */
 .stButton > button,
 .stButton > button *,
 .stButton > button p,
@@ -60,6 +60,9 @@ html, body { background-color:#F8F9FA !important; color:#1A1A2E !important; }
 .badge-roxo, .badge-roxo * {
     color:white !important;
 }
+.hub-header h1, .hub-header h2, .hub-header h3,
+.hub-header div { color:white !important; }
+.hub-header p   { color:#A3E635 !important; }
 
 /* Inputs */
 .stTextInput > div > div > input,
