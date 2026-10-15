@@ -177,6 +177,28 @@ def _executar_agente(agente: dict):
         if st.session_state.get("etapa", "") in estados_login:
             st.session_state["etapa"] = etapa_app
 
+    # Nexus English: perfil precisa existir com chaves corretas ao pular login
+    if codigo_key == "nexus_english":
+        if not st.session_state.get("perfil") or "habilidades" not in st.session_state.get("perfil", {}):
+            st.session_state["perfil"] = {
+                "nome": st.session_state.sa_usuario,
+                "nivel_estimado": "A1",
+                "objetivo": "Aprender inglês",
+                "api_key": st.session_state.sa_api_key,
+                "unidade_atual": "A1_U01",
+                "streak_dias": 0,
+                "ultima_aula": None,
+                "habilidades": {},
+                "vocabulario": [],
+                "erros_recorrentes": [],
+                "sessoes": [],
+                "historico_chat": [],
+                "historico_conv": [],
+                "diagnostico_feito": False,
+                "pontos": 0,
+            }
+            st.session_state["etapa"] = "app"
+
     # Namespace de módulo limpo — simula execução independente de um .py
     # Inclui todos os imports que os agentes usam no nível de módulo
     _ns = {
