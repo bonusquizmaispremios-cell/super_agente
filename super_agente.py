@@ -435,8 +435,10 @@ elif st.session_state.sa_etapa == "Hub":
         <div class="hub-header">
             <div style="font-size:3em; margin-bottom:8px;">🤖</div>
             <h1 style="color:#1E1B4B !important; margin:0; font-size:1.8em;">Super Agente IA</h1>
-            <p style="color:#1E1B4B !important; margin:6px 0 0 0; font-size:1em;">
-                Olá, <b style="color:#1E1B4B !important;">{st.session_state.sa_usuario}</b> · Escolha seu agente
+            <p style="margin:6px 0 0 0; font-size:1em;">
+                <span style="color:#1E1B4B !important; font-weight:400;">Olá,</span>
+                <span style="color:#1E1B4B !important; font-weight:700;">{st.session_state.sa_usuario}</span>
+                <span style="color:#1E1B4B !important; font-weight:400;">· Escolha seu agente</span>
             </p>
         </div>
         """, unsafe_allow_html=True)
