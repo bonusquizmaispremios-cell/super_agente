@@ -175,7 +175,10 @@ def _executar_agente(agente: dict):
         if st.session_state.get("etapa", "") in estados_login:
             st.session_state["etapa"] = etapa_app
 
-    exec(compile(codigo, f"<{codigo_key}>", "exec"), {"__file__": f"<{codigo_key}>", "__name__": "__main__"})
+    _ns = globals().copy()
+    _ns["__file__"] = f"<{codigo_key}>"
+    _ns["__name__"] = "__main__"
+    exec(compile(codigo, f"<{codigo_key}>", "exec"), _ns)
 
 
 # ══════════════════════════════════════════════════════════════════════════
