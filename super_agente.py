@@ -25,7 +25,36 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-.stApp { background-color:#F8F9FA; font-family:'Inter',sans-serif; }
+/* Força tema claro em todo o app — sobrescreve dark mode do Streamlit */
+html, body, .stApp, [data-testid="stAppViewContainer"],
+[data-testid="stMain"], [data-testid="block-container"],
+.main, .block-container, section[data-testid="stSidebar"] ~ div {
+    background-color:#F8F9FA !important;
+    color:#1A1A2E !important;
+}
+.stApp { font-family:'Inter',sans-serif; }
+/* Textos gerais */
+.stApp p, .stApp span, .stApp label, .stApp div,
+.stApp li, .stApp td, .stApp th, .stApp pre,
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] li,
+[data-testid="stMarkdownContainer"] span {
+    color:#1A1A2E !important;
+}
+/* Expanders e containers */
+[data-testid="stExpander"], .streamlit-expanderHeader,
+[data-testid="stVerticalBlock"], [data-testid="stHorizontalBlock"] {
+    background-color:#F8F9FA !important;
+    color:#1A1A2E !important;
+}
+/* Abas */
+[data-testid="stTabs"] { background-color:#F8F9FA !important; }
+.stTabs [data-baseweb="tab-panel"] { background-color:#F8F9FA !important; }
+.stTabs [data-baseweb="tab"] { color:#495057 !important; }
+.stTabs [aria-selected="true"] { color:#1A1A2E !important; border-bottom-color:#495057 !important; }
+/* Métricas */
+[data-testid="stMetric"] { background:#FFFFFF !important; border-radius:10px; padding:12px; border:1px solid #DEE2E6; }
+[data-testid="stMetricValue"], [data-testid="stMetricLabel"] { color:#1A1A2E !important; }
 [data-testid="stSidebar"] { display:none; }
 
 .stTextInput>div>div>input, .stTextArea>div>textarea,
@@ -90,7 +119,7 @@ st.markdown("""
 .chat-scroll-container { max-height:40vh; overflow-y:auto; display:flex; flex-direction:column; scroll-behavior:smooth; padding-bottom:4px; }
 
 .hub-header {
-    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+    background: linear-gradient(135deg, #3B4B6B 0%, #2C3E6B 50%, #1A3460 100%);
     border-radius: 20px; padding: 36px 32px; margin-bottom: 32px; text-align: center;
 }
 .hub-card {
