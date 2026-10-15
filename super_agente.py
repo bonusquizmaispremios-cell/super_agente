@@ -151,6 +151,9 @@ for _k, _v in _defaults.items():
 
 # ── HELPER: EXECUTAR AGENTE EMBUTIDO ─────────────────────────────────────
 def _executar_agente(agente: dict):
+    import math, random, pandas as pd
+    from datetime import datetime, date, timedelta
+
     codigo_key = agente["codigo"]
     if codigo_key not in _CODIGOS_AGENTES:
         st.error(f"❌ Código do agente '{agente['nome']}' não encontrado.")
@@ -175,9 +178,25 @@ def _executar_agente(agente: dict):
         if st.session_state.get("etapa", "") in estados_login:
             st.session_state["etapa"] = etapa_app
 
-    _ns = globals().copy()
-    _ns["__file__"] = f"<{codigo_key}>"
-    _ns["__name__"] = "__main__"
+    # Namespace de módulo limpo — simula execução independente de um .py
+    # Inclui todos os imports que os agentes usam no nível de módulo
+    _ns = {
+        "__file__":   f"<{codigo_key}>",
+        "__name__":   "__main__",
+        "__builtins__": __builtins__,
+        # bibliotecas usadas pelos agentes
+        "st":         st,
+        "Groq":       Groq,
+        "json":       json,
+        "os":         os,
+        "re":         re,
+        "math":       math,
+        "random":     random,
+        "pd":         pd,
+        "datetime":   datetime,
+        "date":       date,
+        "timedelta":  timedelta,
+    }
     exec(compile(codigo, f"<{codigo_key}>", "exec"), _ns)
 
 
